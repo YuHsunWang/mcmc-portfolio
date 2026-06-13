@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local matplotlib cache
+data/.matplotlib/
+
+# Backup pickle files are not needed for GitHub.
+# The project uses parquet as the public data format.
+*.pkl
+
+# Smoke-test outputs generated during development
+outputs_smoke/
+outputs_smoke2/
+outputs_demo_smoke/
+outputs_realistic_smoke/
+mcmc_smoke_*/
+
+# Local OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+

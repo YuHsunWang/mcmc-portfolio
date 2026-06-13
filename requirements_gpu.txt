@@ -1,0 +1,10 @@
+# Core dependencies
+numpy
+pandas
+pyarrow
+
+# Optional GPU backend.
+# Install the CuPy package matching your CUDA version, for example:
+# cupy-cuda12x
+#
+# If CuPy is not installed, mcmc_gpu_parallel.py automatically falls back to NumPy.

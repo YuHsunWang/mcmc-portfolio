@@ -1,0 +1,14 @@
+{
+  "backend": "numpy-cpu-fallback",
+  "n_users": 100,
+  "n_sessions": 298,
+  "n_observations": 2867,
+  "n_iter": 10000,
+  "elapsed_seconds": 86.660215099997,
+  "final_accuracy": 0.5005231949773282,
+  "final_acceptance": {
+    "a_u": 0.0,
+    "s_u": 0.9,
+    "C_switch_u": 0.76
+  }
+}

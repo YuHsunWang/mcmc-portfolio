@@ -1,0 +1,37 @@
+{
+  "folder": "D:/下載/mcmc_portfolio",
+  "synthetic_version": "realistic_sparse_v1",
+  "primary_data_file": "data/itemPV_202201to202204.parquet",
+  "primary_data_size_bytes": 1706626,
+  "rows": 135638,
+  "users": 5200,
+  "sessions": 22829,
+  "train_rows": 87815,
+  "test_rows": 47823,
+  "events_per_session_mean": 5.941477944719436,
+  "median_unique_categories_per_user": 4.0,
+  "category_counts": {
+    "5": 13481,
+    "6": 10199,
+    "9": 19803,
+    "11": 18731,
+    "19": 6409,
+    "20": 8271,
+    "21": 16571,
+    "22": 14862,
+    "23": 16944,
+    "25": 10367
+  },
+  "primary_interest_counts": {
+    "Appliances": 622,
+    "Books": 477,
+    "Electronics": 788,
+    "Gaming": 366,
+    "Home": 954,
+    "Lifestyle": 269,
+    "Mobile": 556,
+    "Toys": 456,
+    "Travel": 404,
+    "Vehicles": 308
+  }
+}
