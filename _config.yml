@@ -1,3 +1,0 @@
-theme: jekyll-theme-cayman
-title: Bayesian MCMC Browsing Preference Model
-description: A portfolio project estimating heterogeneous user preferences from browsing sequences with a Metropolis-Hastings MCMC sampler.

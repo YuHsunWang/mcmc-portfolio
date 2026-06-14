@@ -8,9 +8,9 @@ The repository is designed as a portfolio project. It includes synthetic browsin
 
 - Builds a session-level sequence model from browsing events.
 - Estimates user-specific parameters:
-  - preference strength: `$a_u$`
-  - diversity/elasticity: `$s_u = 1 + z_u,\ z_u > 0$`
-  - switching cost: `$C^{switch}_u$`
+  - preference strength: $a_u$
+  - diversity/elasticity: $s_u = 1 + z_u,\ z_u > 0$
+  - switching cost: $C^{switch}_u$
 - Uses an empirical transition matrix as a switching-friction proxy.
 - Implements Metropolis-Hastings updates for user-level parameters.
 - Provides both notebook and tensorized GPU-ready implementations.
@@ -90,11 +90,11 @@ python generate_realistic_synthetic_data.py
 
 ## Model Overview
 
-For each user `$u$`, the model estimates:
+For each user $u$, the model estimates:
 
-- `$a_u$`: category preference vector
-- `$s_u$`: diversity/elasticity parameter, constrained as `$s_u = 1 + z_u$`
-- `$C^{switch}_u$`: user-level switching-cost scale
+- $a_u$: category preference vector
+- $s_u$: diversity/elasticity parameter, constrained as $s_u = 1 + z_u$
+- $C^{switch}_u$: user-level switching-cost scale
 
 The marginal utility for each category is converted into choice probabilities using a multinomial logit model with an outside/stop option.
 
@@ -253,21 +253,6 @@ Suggested robustness statement:
 - Short demo runs are useful for visualization but are not enough for final statistical inference.
 - For serious inference, use longer chains, burn-in, posterior averaging, and convergence diagnostics.
 - Benchmark results depend on the synthetic data-generating process and should be interpreted as pipeline validation rather than real business performance.
-
-## GitHub Publishing
-
-The included `.gitignore` excludes temporary files, pickle backups, and smoke-test outputs while keeping the final compact result folders.
-
-From inside this folder:
-
-```bash
-git init
-git add .
-git commit -m "Add Bayesian MCMC browsing preference portfolio project"
-git branch -M main
-git remote add origin https://github.com/<your-username>/<your-repo>.git
-git push -u origin main
-```
 
 ## License
 
