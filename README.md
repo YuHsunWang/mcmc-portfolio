@@ -43,6 +43,9 @@ mcmc_portfolio/
 |   |-- benchmark_comparison.csv
 |   |-- gpu_mcmc_results.npz
 |   `-- gpu_mcmc_summary.json
+|-- figures/
+|   |-- convergence.png
+|   `-- benchmark.png
 `-- README.md
 ```
 
@@ -108,6 +111,17 @@ The MCMC sampler iteratively:
 
 See [MCMC_iterative_flow.md](MCMC_iterative_flow.md) for the iteration flowchart.
 
+## Convergence Diagnostics
+
+Convergence diagnostics for the realistic sparse-interest scenario (100 users, 10,000 iterations):
+
+![MCMC convergence diagnostics](figures/convergence.png)
+
+- **(a) Acceptance rate**: the three parameter blocks settle into stable Metropolis-Hastings acceptance bands. The low rate for $a_u$ is expected, since it is a 10-dim vector proposed and accepted as one block.
+- **(b) Train accuracy**: the sampler reaches ~0.71 next-category accuracy within a few hundred iterations and stays flat.
+- **(c) Population-level hyperparameters**: $\theta_{switch}$ converges almost immediately, while $\theta_s$ climbs and then mixes around a stable level — typical post-burn-in behavior for a hierarchical model.
+- **(d) User-level traces**: the diversity parameter $s_u$ for five sampled users keeps mixing without getting stuck, indicating healthy exploration at the user level.
+
 ## Benchmarks
 
 The demo notebook compares the MCMC model with simple held-out test benchmarks:
@@ -133,6 +147,8 @@ The included result files use `100 users` and `10,000 MCMC iterations` for each 
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Balanced synthetic | 50.05% | 48.13% | 64.73% | 0.873 | +0.72 pp | +31.47 pp | +35.27 pp |
 | Realistic sparse synthetic | 70.97% | 67.30% | 85.34% | 0.814 | +4.11 pp | +25.63 pp | +54.01 pp |
+
+![Held-out benchmark comparison](figures/benchmark.png)
 
 The MCMC model consistently outperforms popularity-based and user-frequency baselines. In the realistic sparse-interest setting, it also outperforms the Markov transition benchmark across Top-1 accuracy, Top-3 accuracy, and sequence similarity.
 
