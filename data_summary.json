@@ -1,5 +1,5 @@
 {
-  "folder": "D:/下載/mcmc_portfolio",
+  "folder": "mcmc_portfolio",
   "synthetic_version": "realistic_sparse_v1",
   "primary_data_file": "data/itemPV_202201to202204.parquet",
   "primary_data_size_bytes": 1706626,

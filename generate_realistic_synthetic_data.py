@@ -150,23 +150,23 @@ def generate(root: Path, n_users: int = 5200, seed: int = 20260614):
                 start_time = base_date + pd.Timedelta(days=day_offset, minutes=minute_offset)
                 seq = sample_session_sequence(rng, primary, secondary, user_prob)
 
-                for order, g_class4 in enumerate(seq):
+                for order, category in enumerate(seq):
                     rows.append(
                         {
-                            "CID": cid,
+                            "ID": cid,
                             "session_id": session_id,
                             "order": order,
                             "time": start_time + pd.Timedelta(seconds=35 * order + int(rng.integers(0, 25))),
-                            "g_class4": int(g_class4),
-                            "succ_joined": 1,
-                            "category_name": CATEGORY_NAMES[int(g_class4)],
+                            "category": int(category),
+                            "event": 1,
+                            "category_name": CATEGORY_NAMES[int(category)],
                             "primary_interest": CATEGORY_NAMES[int(primary)],
                             "is_fake_data": True,
                             "synthetic_version": "realistic_sparse_v1",
                         }
                     )
 
-    df = pd.DataFrame(rows).sort_values(["CID", "session_id", "order"]).reset_index(drop=True)
+    df = pd.DataFrame(rows).sort_values(["ID", "session_id", "order"]).reset_index(drop=True)
     parquet_path = data_dir / "itemPV_202201to202204.parquet"
     pkl_path = data_dir / "itemPV_202201to202204.pkl"
     df.to_parquet(parquet_path, index=False)
@@ -179,14 +179,14 @@ def generate(root: Path, n_users: int = 5200, seed: int = 20260614):
         "primary_data_file": "data/itemPV_202201to202204.parquet",
         "primary_data_size_bytes": parquet_path.stat().st_size,
         "rows": int(len(df)),
-        "users": int(df["CID"].nunique()),
+        "users": int(df["ID"].nunique()),
         "sessions": int(df["session_id"].nunique()),
         "train_rows": int((df["time"] < pd.Timestamp("2022-02-01")).sum()),
         "test_rows": int((df["time"] >= pd.Timestamp("2022-02-01")).sum()),
         "events_per_session_mean": float(df.groupby("session_id").size().mean()),
-        "median_unique_categories_per_user": float(df.groupby("CID")["g_class4"].nunique().median()),
-        "category_counts": {str(k): int(v) for k, v in df["g_class4"].value_counts().sort_index().items()},
-        "primary_interest_counts": {str(k): int(v) for k, v in df.groupby("CID")["primary_interest"].first().value_counts().sort_index().items()},
+        "median_unique_categories_per_user": float(df.groupby("ID")["category"].nunique().median()),
+        "category_counts": {str(k): int(v) for k, v in df["category"].value_counts().sort_index().items()},
+        "primary_interest_counts": {str(k): int(v) for k, v in df.groupby("ID")["primary_interest"].first().value_counts().sort_index().items()},
     }
     (root / "data_summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
     return summary

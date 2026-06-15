@@ -69,12 +69,12 @@ Required columns:
 
 | Column | Description |
 |---|---|
-| `CID` | User/customer ID |
+| `ID` | User/customer ID |
 | `session_id` | Browsing session ID |
 | `order` | Event order within a session |
 | `time` | Event timestamp |
-| `g_class4` | Original category ID |
-| `succ_joined` | Event indicator used to rebuild order |
+| `category` | Original category ID |
+| `event` | Event indicator used to rebuild order |
 | `category_name` | Human-readable synthetic category label |
 | `is_fake_data` | Marks the row as synthetic |
 

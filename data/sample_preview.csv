@@ -1,4 +1,4 @@
-﻿CID,session_id,order,time,g_class4,succ_joined,category_name,primary_interest,is_fake_data,synthetic_version
+﻿ID,session_id,order,time,category,event,category_name,primary_interest,is_fake_data,synthetic_version
 100000,test_0000007,0,2022-03-14 18:57:24,5,1,Toys,Books,True,realistic_sparse_v1
 100000,test_0000007,1,2022-03-14 18:57:56,5,1,Toys,Books,True,realistic_sparse_v1
 100000,test_0000007,2,2022-03-14 18:58:27,5,1,Toys,Books,True,realistic_sparse_v1

@@ -131,31 +131,31 @@ def prepare_training_tensors(data_path: Path, n_users: int, seed: int):
     rng = np.random.default_rng(seed)
 
     df = pd.read_parquet(data_path)
-    df["gclass"] = df["g_class4"].astype(int)
-    df = df[df["gclass"].isin(TOP10)].copy()
+    df["cat"] = df["category"].astype(int)
+    df = df[df["cat"].isin(TOP10)].copy()
     map_dict = {key: value for value, key in enumerate(TOP10)}
-    df["c"] = df["gclass"].map(map_dict).astype(int)
+    df["c"] = df["cat"].map(map_dict).astype(int)
 
     train = df[df["time"] < "2022-02-01"].copy()
     test = df[df["time"] >= "2022-02-01"].copy()
-    common_users = sorted(set(train["CID"]).intersection(test["CID"]))
-    train = train[train["CID"].isin(common_users)]
+    common_users = sorted(set(train["ID"]).intersection(test["ID"]))
+    train = train[train["ID"].isin(common_users)]
 
     grouped = (
-        train.sort_values(["CID", "session_id", "order"])
-        .groupby(["CID", "session_id"])["c"]
+        train.sort_values(["ID", "session_id", "order"])
+        .groupby(["ID", "session_id"])["c"]
         .apply(list)
         .reset_index()
     )
     grouped["len"] = grouped["c"].str.len()
     grouped = grouped[grouped["len"] <= 100].copy()
 
-    eligible_users = np.array(sorted(grouped["CID"].unique()))
+    eligible_users = np.array(sorted(grouped["ID"].unique()))
     if n_users > len(eligible_users):
         raise ValueError(f"n_users={n_users} exceeds available users={len(eligible_users)}")
     selected_users = np.sort(rng.choice(eligible_users, size=n_users, replace=False))
     user_to_idx = {cid: i for i, cid in enumerate(selected_users)}
-    grouped = grouped[grouped["CID"].isin(selected_users)].copy()
+    grouped = grouped[grouped["ID"].isin(selected_users)].copy()
 
     sequences = grouped["c"].tolist()
     transition = build_transition_matrix(sequences)
@@ -165,7 +165,7 @@ def prepare_training_tensors(data_path: Path, n_users: int, seed: int):
     obs_user, obs_choice, obs_x, obs_switch = [], [], [], []
     stop_user, stop_x, stop_switch = [], [], []
 
-    for cid, seq in zip(grouped["CID"].to_numpy(), grouped["c"]):
+    for cid, seq in zip(grouped["ID"].to_numpy(), grouped["c"]):
         u = user_to_idx[cid]
         state = np.zeros(N_CATE, dtype=np.float32)
         prev_choice = None
