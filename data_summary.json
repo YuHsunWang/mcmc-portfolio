@@ -1,7 +1,7 @@
 {
   "folder": "mcmc_portfolio",
   "synthetic_version": "realistic_sparse_v1",
-  "primary_data_file": "data/itemPV_202201to202204.parquet",
+  "primary_data_file": "data/browsing_sessions.parquet",
   "primary_data_size_bytes": 1706626,
   "rows": 135638,
   "users": 5200,

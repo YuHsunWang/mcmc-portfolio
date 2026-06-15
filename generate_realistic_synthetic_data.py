@@ -167,8 +167,8 @@ def generate(root: Path, n_users: int = 5200, seed: int = 20260614):
                     )
 
     df = pd.DataFrame(rows).sort_values(["ID", "session_id", "order"]).reset_index(drop=True)
-    parquet_path = data_dir / "itemPV_202201to202204.parquet"
-    pkl_path = data_dir / "itemPV_202201to202204.pkl"
+    parquet_path = data_dir / "browsing_sessions.parquet"
+    pkl_path = data_dir / "browsing_sessions.pkl"
     df.to_parquet(parquet_path, index=False)
     df.to_pickle(pkl_path)
     df.head(1000).to_csv(data_dir / "sample_preview.csv", index=False, encoding="utf-8-sig")
@@ -176,7 +176,7 @@ def generate(root: Path, n_users: int = 5200, seed: int = 20260614):
     summary = {
         "folder": str(root).replace("\\", "/"),
         "synthetic_version": "realistic_sparse_v1",
-        "primary_data_file": "data/itemPV_202201to202204.parquet",
+        "primary_data_file": "data/browsing_sessions.parquet",
         "primary_data_size_bytes": parquet_path.stat().st_size,
         "rows": int(len(df)),
         "users": int(df["ID"].nunique()),

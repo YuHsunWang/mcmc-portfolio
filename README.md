@@ -31,8 +31,8 @@ mcmc_portfolio/
 |-- data_summary.json
 |-- robustness_summary_100u_10000iter.csv
 |-- data/
-|   |-- itemPV_202201to202204.parquet
-|   |-- itemPV_202201to202204_balanced.parquet
+|   |-- browsing_sessions.parquet
+|   |-- browsing_sessions_balanced.parquet
 |   |-- corr.csv
 |   `-- sample_preview.csv
 |-- outputs_100u_10000iter/
@@ -56,13 +56,13 @@ This project uses synthetic browsing data for reproducibility and public sharing
 Main data file:
 
 ```text
-data/itemPV_202201to202204.parquet
+data/browsing_sessions.parquet
 ```
 
 The earlier balanced synthetic dataset is kept as a comparison scenario:
 
 ```text
-data/itemPV_202201to202204_balanced.parquet
+data/browsing_sessions_balanced.parquet
 ```
 
 Required columns:
@@ -215,7 +215,7 @@ python mcmc_gpu_parallel.py --n-users 100 --n-iter 10000 --output-dir outputs_re
 Run the balanced scenario:
 
 ```bash
-python mcmc_gpu_parallel.py --data data/itemPV_202201to202204_balanced.parquet --n-users 100 --n-iter 10000 --output-dir outputs_100u_10000iter
+python mcmc_gpu_parallel.py --data data/browsing_sessions_balanced.parquet --n-users 100 --n-iter 10000 --output-dir outputs_100u_10000iter
 ```
 
 Optional GPU dependency:

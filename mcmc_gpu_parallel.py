@@ -404,7 +404,7 @@ def parse_args():
     parser.add_argument(
         "--data",
         type=Path,
-        default=SCRIPT_DIR / "data" / "itemPV_202201to202204.parquet",
+        default=SCRIPT_DIR / "data" / "browsing_sessions.parquet",
         help="Path to the synthetic browsing parquet file.",
     )
     parser.add_argument("--n-users", type=int, default=1000, help="Number of users to sample.")
